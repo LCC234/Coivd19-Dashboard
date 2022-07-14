@@ -1,5 +1,5 @@
 const width = 900;
-const height = 600;
+const height = 500;
 
 const svg = d3.select('svg')
     .attr('width', width)
@@ -9,7 +9,6 @@ var tooltip = d3.select("#tooltip")
 
 let mouseOver = (d) => {
     d3.selectAll(".country")
-
         .style("opacity", 0.5);
     
     d3.select(d.srcElement )
@@ -32,7 +31,11 @@ let mouseOver = (d) => {
         .text('Population: ' + dataset[d.srcElement.id][1].toLocaleString());
     
     tooltip.select('#temp')
-        .html('Temp Rise: <b>' + Number(dataset[d.srcElement.id][2]).toFixed(1) + ' &#8451;</b>')
+        .html('Temp Rise: <b>' + Number(dataset[d.srcElement.id][2]).toFixed(1) + ' &#8451;</b>');
+    
+    tooltip.select('#co')
+        .html('CO<sub>2</sub> Emission: <b>' + Number(dataset[d.srcElement.id][3]).toFixed(2) + ' ton/capita</b>')
+    
 }
 
 let mouseLeave = (d)=>{
@@ -56,15 +59,15 @@ const map_g = svg.append('g')
 var redRange = ['#FFFFFF', '#B03A2E']
 var colorScale = d3.scaleLinear()
                 .range(redRange)
-var minDomain = 0;
-var maxDomain = 10;
+var minDomain = -0.8;
+var maxDomain = 3.1;
 
 const legendWidth = 300
 const legendHeigth = 20
 var legendInterval = []
 const tickNo = 5
 const legend_g = svg.append("g")
-                    .attr("transform", "translate(" + (width - legendWidth - 10) + ", "+ (height - 150) +")");
+                    .attr("transform", "translate(" + (width - legendWidth - 10) + ", 420)");
 
 
 legend_g.append('text')
@@ -98,23 +101,31 @@ const legendRect = legend_g.append("rect")
 var promises = []
 promises.push(d3.json('data/geo.json'))
 promises.push(d3.csv('data/temp.csv'))
+promises.push(d3.csv('data/co2.csv'))
 
 
 Promise.all(promises)
-    .then(([geoData, tempData]) =>{
+    .then(([geoData, tempData,coData]) =>{
         geoData.features.forEach(d => {
-            dataset[d.properties.iso_a3] = [d.properties.name, d.properties.pop_est, 0]
+            dataset[d.properties.iso_a3] = [d.properties.name, d.properties.pop_est, 0,0]
         });
 
         tempData.forEach(d => {
             if (dataset[d.ISO3]) {
-                dataset[d.ISO3][2] = Number(d.F2021);
-            }else if (d.ISO3 == 'MAX') {
-                maxDomain = Number(d.F2021);
-            }else if (d.ISO3 == 'MIN') {
-                minDomain = Number(d.F2021);
+                dataset[d.ISO3][2] = Number(d[2019]);
             }
+            // else if (d.ISO3 == 'MAX') {
+            //     maxDomain = Number(d.F2021);
+            // }else if (d.ISO3 == 'MIN') {
+            //     minDomain = Number(d.F2021);
+            // }
         });
+
+        coData.forEach(d => {
+            if (dataset[d.ISO3]) {
+                dataset[d.ISO3][3] = Number(d[2019])
+            }
+        })
 
         console.log(dataset)
         console.log(maxDomain)
