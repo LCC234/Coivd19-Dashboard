@@ -1,0 +1,48 @@
+.country{
+    /* fill:#ccc; */
+    stroke: #999;
+    stroke-width: 1;
+}
+/* 
+.country:hover {
+	fill-opacity: .7;
+} */
+
+.tooltip{
+    opacity: 0;
+    background-color:white;
+    border:solid;
+    border-width:2px;
+    border-radius:20px;
+    padding:10px 15px;
+    position:absolute;
+    box-shadow:2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.tooltip h2{
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+.tooltip h5{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.tooltip .para{
+    font-size: 85%;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+
+.tooltip ul{
+    padding-left: 25px;
+    font-size: 90%;
+}
+
+.tooltip ul li{
+    padding-bottom: 5px;
+}

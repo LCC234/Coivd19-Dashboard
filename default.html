@@ -4,14 +4,30 @@
 	<meta charset="utf-8">
 	<title>Narrative Visualisation</title>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+	<script src="js/d3-annotation.js"></script>
+	<link rel="stylesheet" href="css/base.css">
 </head>
 
 <body>
 
 	<p>Global Map</p>
 
+	<div id="tooltip" class="tooltip">
+		<h2 id="country">Country</h2>
+		<h5 id="pop">Population: </h5>
+		<hr/>
+
+		<p id="temp" class="para"></p>
+		<p class="para">Para2:</p>
+		<!-- <ul>
+			<li id="temp">Temp: </li>
+			<li>Para2: </li>
+		</ul> -->
+	</div>
 	<svg></svg>
 
-	<script src="narr.js"></script>
+	<script src="js/narr.js"></script>
+	
 
 </body>

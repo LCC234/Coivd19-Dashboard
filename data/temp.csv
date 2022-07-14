@@ -1,0 +1,230 @@
+Country,ISO2,ISO3,F1980,F2000,F2021
+,,MIN,-0.9,-0.5,-0.4
+,,MAX,1.1,2.1,2.6
+"Afghanistan, Islamic Rep. of",AF,AFG,0.7,1.1,1.4
+Albania,AL,ALB,-0.4,1.1,1.7
+Algeria,DZ,DZA,0.2,0.8,2.3
+American Samoa,AS,ASM,0.3,0.7,0.7
+"Andorra, Principality of",AD,AND,-0.2,1.0,1.4
+Angola,AO,AGO,0.3,0.3,1.6
+Anguilla,AI,AIA,0.7,0.3,0.9
+Antigua and Barbuda,AG,ATG,0.7,0.4,0.9
+Argentina,AR,ARG,0.3,-0.2,1.0
+"Armenia, Rep. of",AM,ARM,0.0,1.0,2.2
+"Aruba, Kingdom of the Netherlands",AW,ABW,0.6,-0.1,0.0
+Australia,AU,AUS,0.9,0.1,0.6
+Austria,AT,AUT,-0.3,1.8,1.4
+"Azerbaijan, Rep. of",AZ,AZE,0.0,1.1,2.1
+"Bahamas, The",BS,BHS,0.4,0.3,0.7
+"Bahrain, Kingdom of",BH,BHR,0.3,1.1,2.4
+Bangladesh,BD,BGD,0.1,0.2,1.3
+Barbados,BB,BRB,0.4,0.3,1.1
+"Belarus, Rep. of",BY,BLR,0.0,1.9,1.7
+Belgium,BE,BEL,0.0,1.5,1.2
+Belize,BZ,BLZ,0.6,0.0,1.1
+Benin,BJ,BEN,0.5,0.5,1.7
+Bhutan,BT,BTN,0.1,0.0,1.5
+Bolivia,BO,BOL,0.2,0.3,0.6
+Bosnia and Herzegovina,BA,BIH,0.0,1.6,1.7
+Botswana,BW,BWA,0.0,-0.4,0.0
+Brazil,BR,BRA,0.3,0.5,1.2
+British Virgin Islands,VG,VGB,0.8,0.2,0.9
+Brunei Darussalam,BN,BRN,0.2,0.3,1.0
+Bulgaria,BG,BGR,-0.5,1.2,1.8
+Burkina Faso,BF,BFA,0.8,0.6,1.8
+Burundi,BI,BDI,0.0,0.0,0.0
+Cabo Verde,CV,CPV,1.0,1.4,1.2
+Cambodia,KH,KHM,0.3,0.3,0.9
+Cameroon,CM,CMR,0.4,0.5,1.1
+Canada,CA,CAN,0.9,1.3,2.5
+Cayman Islands,KY,CYM,0.7,0.0,1.2
+Central African Rep.,CF,CAF,0.4,0.8,1.3
+Chad,TD,TCD,0.4,0.3,1.0
+Chile,CL,CHL,0.3,-0.2,0.7
+"China, P.R.: Hong Kong",HK,HKG,0.3,0.2,2.0
+"China, P.R.: Macao",MO,MAC,0.3,0.2,2.0
+"China, P.R.: Mainland",CN,CHN,0.3,0.6,1.7
+Colombia,CO,COL,0.5,-0.1,0.9
+"Comoros, Union of the",KM,COM,0.2,0.2,0.5
+"Congo, Dem. Rep. of the",CD,COD,0.3,0.5,1.8
+"Congo, Rep. of",CG,COG,0.3,0.5,1.4
+Cook Islands,CK,COK,0.3,0.9,1.5
+Costa Rica,CR,CRI,0.3,-0.3,0.0
+"Croatia, Rep. of",HR,HRV,0.0,1.6,1.6
+Cuba,CU,CUB,0.5,0.5,1.3
+Cyprus,CY,CYP,-0.3,0.6,2.1
+Czech Rep.,CZ,CZE,0.0,1.9,1.3
+Denmark,DK,DNK,-0.4,1.7,1.7
+Djibouti,DJ,DJI,0.9,0.8,0.0
+Dominica,DM,DMA,0.4,0.4,0.8
+Dominican Rep.,DO,DOM,0.7,0.6,1.1
+Ecuador,EC,ECU,0.5,0.2,0.5
+"Egypt, Arab Rep. of",EG,EGY,-0.1,0.0,1.6
+El Salvador,SV,SLV,0.4,0.3,1.4
+"Equatorial Guinea, Rep. of",GQ,GNQ,0.3,0.4,1.0
+"Eritrea, The State of",ER,ERI,0.0,0.6,1.4
+"Estonia, Rep. of",EE,EST,0.0,2.0,2.1
+"Eswatini, Kingdom of",SZ,SWZ,-0.1,-0.1,0.4
+"Ethiopia, The Federal Dem. Rep. of",ET,ETH,0.0,0.6,1.5
+Falkland Islands (Malvinas),FK,FLK,0.2,0.0,0.0
+Faroe Islands,FO,FRO,0.0,0.2,1.0
+"Fiji, Rep. of",FJ,FJI,0.2,0.8,1.1
+Finland,FI,FIN,-0.4,2.0,1.9
+France,FR,FRA,-0.2,1.1,1.2
+French Polynesia,PF,PYF,0.2,0.3,0.8
+Gabon,GA,GAB,0.3,0.4,0.9
+"Gambia, The",GM,GMB,0.8,1.1,1.9
+Georgia,GE,GEO,0.0,1.0,1.7
+Germany,DE,DEU,-0.2,1.8,1.3
+Ghana,GH,GHA,0.5,0.5,1.7
+Gibraltar,GI,GIB,0.3,0.8,1.6
+Greece,GR,GRC,-0.4,0.7,1.7
+Greenland,GL,GRL,0.9,0.8,2.5
+Grenada,GD,GRD,0.3,0.4,0.9
+Guadeloupe,GP,GLP,0.6,0.3,0.9
+Guatemala,GT,GTM,0.4,0.5,1.4
+"Guiana, French",GF,GUF,0.5,0.4,1.3
+Guinea,GN,GIN,0.6,0.7,1.8
+Guinea-Bissau,GW,GNB,0.7,1.1,1.9
+Guyana,GY,GUY,0.5,0.6,1.2
+Haiti,HT,HTI,0.7,0.9,1.0
+Holy See,VA,VAT,-0.6,1.1,1.3
+Honduras,HN,HND,0.4,0.1,1.0
+Hungary,HU,HUN,-0.6,1.8,1.5
+Iceland,IS,ISL,0.3,0.3,1.0
+India,IN,IND,0.4,0.3,0.7
+Indonesia,ID,IDN,0.3,0.3,1.0
+"Iran, Islamic Rep. of",IR,IRN,0.5,1.1,2.1
+Iraq,IQ,IRQ,-0.1,0.9,2.5
+Ireland,IE,IRL,-0.1,0.5,1.1
+Isle of Man,IM,IMN,0.0,0.6,1.0
+Israel,IL,ISR,-0.2,0.3,1.9
+Italy,IT,ITA,-0.4,1.2,1.5
+Jamaica,JM,JAM,0.5,0.2,1.3
+Japan,JP,JPN,-0.2,0.6,1.2
+Jordan,JO,JOR,-0.2,0.4,2.1
+"Kazakhstan, Rep. of",KZ,KAZ,0.0,1.5,1.4
+Kenya,KE,KEN,0.6,0.5,1.3
+Kiribati,KI,KIR,0.2,0.4,1.1
+"Korea, Dem. People's Rep. of",KP,PRK,0.0,0.6,2.0
+"Korea, Rep. of",KR,KOR,-0.5,0.4,1.6
+Kuwait,KW,KWT,0.3,1.0,2.5
+Kyrgyz Rep.,KG,KGZ,0.0,1.1,1.4
+Lao People's Dem. Rep.,LA,LAO,0.5,0.1,1.2
+Latvia,LV,LVA,0.0,2.0,1.9
+Lebanon,LB,LBN,-0.2,0.6,2.2
+"Lesotho, Kingdom of",LS,LSO,0.2,0.3,0.8
+Liberia,LR,LBR,0.4,0.5,1.6
+Libya,LY,LBY,-0.1,0.2,1.8
+Liechtenstein,LI,LIE,-0.2,1.4,1.2
+Lithuania,LT,LTU,0.0,2.0,1.7
+Luxembourg,LU,LUX,0.0,1.6,1.1
+"Madagascar, Rep. of",MG,MDG,0.3,0.4,1.0
+Malawi,MW,MWI,0.3,0.8,0.6
+Malaysia,MY,MYS,0.3,0.4,1.2
+Maldives,MV,MDV,0.2,0.2,1.0
+Mali,ML,MLI,1.0,0.7,1.8
+Malta,MT,MLT,-0.5,1.0,2.0
+"Marshall Islands, Rep. of the",MH,MHL,0.0,-0.1,0.5
+Martinique,MQ,MTQ,0.3,0.3,0.8
+"Mauritania, Islamic Rep. of",MR,MRT,0.9,1.1,1.9
+Mauritius,MU,MUS,0.4,0.0,0.8
+Mayotte,YT,MYT,0.3,0.2,0.5
+Mexico,MX,MEX,0.4,0.6,1.1
+"Micronesia, Federated States of",FM,FSM,0.0,0.2,0.4
+"Moldova, Rep. of",MD,MDA,0.0,1.5,1.3
+Monaco,MC,MCO,-0.3,1.1,1.3
+Mongolia,MN,MNG,0.5,1.0,2.0
+Montenegro,ME,MNE,0.0,0.0,1.7
+Montserrat,MS,MSR,0.7,0.4,0.9
+Morocco,MA,MAR,0.6,1.0,1.9
+"Mozambique, Rep. of",MZ,MOZ,0.1,0.4,0.5
+Myanmar,MM,MMR,0.3,0.1,1.6
+Namibia,NA,NAM,0.3,0.1,0.9
+"Nauru, Rep. of",NR,NRU,0.2,0.0,0.0
+Nepal,NP,NPL,0.2,0.0,0.5
+"Netherlands, The",NL,NLD,0.0,1.6,1.3
+New Caledonia,NC,NCL,0.2,0.3,0.8
+New Zealand,NZ,NZL,0.0,0.3,0.9
+Nicaragua,NI,NIC,0.7,0.1,1.0
+Niger,NE,NER,0.6,0.9,1.6
+Nigeria,NG,NGA,0.5,0.6,1.5
+Niue,NU,NIU,-0.1,0.0,0.0
+Norfolk Island,NF,NFK,0.0,-0.2,0.8
+"North Macedonia, Republic of ",MK,MKD,0.0,1.1,1.8
+Norway,NO,NOR,-0.3,1.4,1.5
+Oman,OM,OMN,0.2,0.7,1.6
+Pakistan,PK,PAK,0.5,0.7,1.1
+"Palau, Rep. of",PW,PLW,0.0,0.6,-0.3
+Panama,PA,PAN,0.5,0.0,1.0
+Papua New Guinea,PG,PNG,0.2,0.5,1.2
+Paraguay,PY,PRY,0.1,0.1,0.7
+Peru,PE,PER,0.4,0.5,1.1
+Philippines,PH,PHL,0.1,0.6,1.2
+Pitcairn Islands,PN,PCN,-0.2,0.4,0.0
+"Poland, Rep. of",PL,POL,-0.8,1.9,1.4
+Portugal,PT,PRT,0.3,0.6,1.2
+Puerto Rico,PR,PRI,0.6,0.3,1.0
+Qatar,QA,QAT,0.5,0.9,2.2
+Romania,RO,ROU,-0.6,1.3,1.5
+Russian Federation,RU,RUS,0.0,1.3,1.6
+Rwanda,RW,RWA,0.0,0.0,0.0
+Saint Helena,SH,SHN,0.3,1.3,1.5
+Saint Pierre and Miquelon,PM,SPM,-0.2,1.2,2.3
+Samoa,WS,WSM,0.2,0.6,0.6
+"San Marino, Rep. of",SM,SMR,-0.5,1.4,1.3
+"São Tomé and Príncipe, Dem. Rep. of",ST,STP,0.3,0.5,1.3
+Saudi Arabia,SA,SAU,0.1,0.7,2.3
+Senegal,SN,SEN,0.9,1.0,1.9
+"Serbia, Rep. of",RS,SRB,0.0,0.0,1.7
+Seychelles,SC,SYC,0.3,0.2,0.7
+Sierra Leone,SL,SLE,0.4,0.0,1.7
+Singapore,SG,SGP,0.5,0.0,0.0
+Slovak Rep.,SK,SVK,0.0,1.6,1.3
+"Slovenia, Rep. of",SI,SVN,0.0,1.8,1.6
+Solomon Islands,SB,SLB,0.2,0.5,0.3
+Somalia,SO,SOM,0.7,0.5,1.8
+South Africa,ZA,ZAF,0.2,0.3,0.6
+"South Sudan, Rep. of",SS,SSD,0.0,0.0,0.9
+Spain,ES,ESP,0.2,0.7,1.3
+Sri Lanka,LK,LKA,0.5,0.6,1.1
+St. Kitts and Nevis,KN,KNA,0.7,0.4,0.9
+St. Lucia,LC,LCA,0.3,0.4,0.9
+St. Vincent and the Grenadines,VC,VCT,0.3,0.4,0.9
+Sudan,SD,SDN,0.0,0.0,1.2
+Suriname,SR,SUR,0.4,0.5,1.5
+Sweden,SE,SWE,-0.6,1.7,1.9
+Switzerland,CH,CHE,-0.2,1.4,1.1
+Syrian Arab Rep.,SY,SYR,-0.2,0.7,2.4
+Taiwan Province of China,TW,TWN,0.2,0.4,2.1
+"Tajikistan, Rep. of",TJ,TJK,0.0,1.0,1.1
+"Tanzania, United Rep. of",TZ,TZA,0.4,0.6,1.1
+Thailand,TH,THA,0.5,0.1,1.1
+"Timor-Leste, Dem. Rep. of",TL,TLS,0.4,0.0,1.2
+Togo,TG,TGO,0.4,0.6,1.7
+Tokelau,TK,TKL,0.5,0.0,0.0
+Tonga,TO,TON,0.3,0.4,0.6
+Trinidad and Tobago,TT,TTO,0.3,0.5,1.1
+Tunisia,TN,TUN,-0.2,1.0,2.5
+Turkey,TR,TUR,-0.1,0.5,1.9
+Turkmenistan,TM,TKM,0.0,1.3,1.6
+Turks and Caicos Islands,TC,TCA,0.1,0.0,0.0
+Tuvalu,TV,TUV,0.2,0.6,0.7
+Uganda,UG,UGA,0.7,0.3,1.1
+Ukraine,UA,UKR,0.0,1.4,1.4
+United Arab Emirates,AE,ARE,0.5,0.7,1.8
+United Kingdom,GB,GBR,0.0,0.7,1.0
+United States,US,USA,0.4,1.0,1.2
+United States Virgin Islands,VI,VIR,0.7,0.2,1.0
+Uruguay,UY,URY,0.6,0.4,1.0
+"Uzbekistan, Rep. of",UZ,UZB,0.0,1.4,1.5
+Vanuatu,VU,VUT,0.1,0.5,1.1
+"Venezuela, Rep. Bolivariana de",VE,VEN,0.5,0.2,0.7
+Vietnam,VN,VNM,0.3,0.2,1.2
+Wallis and Futuna Islands,WF,WLF,0.2,0.6,0.8
+West Bank and Gaza,PS,PSE,-0.2,0.3,1.9
+Western Sahara,EH,ESH,0.5,0.9,1.6
+World,,WLD,0.3,0.7,1.4
+"Yemen, Rep. of",YE,YEM,0.8,0.0,0.0
+Zambia,ZM,ZMB,0.2,0.3,1.0
+Zimbabwe,ZW,ZWE,0.0,-0.3,-0.1
