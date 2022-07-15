@@ -32,7 +32,7 @@ html {
     float: right;
     overflow: hidden;
     height: 100%;
-    width: 10%;
+    width: 8%;
     text-align: center;
 }
 
@@ -75,6 +75,7 @@ html {
     display: block;
     text-align: left;
     background-color: #f9f9f9;
+    border-bottom: 1px solid #c9c4c4 ;
 }
 
 .dropdown-content a:hover {
@@ -95,10 +96,9 @@ html {
     width: 80%;
     height: 80%;
     vertical-align: top;
-    overflow: hidden;
-    margin: 20px;
+    margin-left: 20px;
     margin-top: 10px;
-    top: 10%;
+    top: 21%;
 }
 
 .svg-content {
@@ -112,16 +112,27 @@ html {
     position: absolute;
     border: 3px solid black;
     left:0;
+    top:-14%;
     z-index: 2;
     background-color: white;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-    padding: 1.5%;
+    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+    padding: 1.1%;
     opacity: 0.8;
+    border-radius: 20px;
+    
 }
 
 .svg-container .map-label .map-label-text{
     margin: 0;
+    font-size: 1.1vw;
+    
+}
+
+.svg-container .map-label .map-label-title{
+    margin: 0;
     font-size: 1.5vw;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .country {
@@ -134,7 +145,7 @@ html {
     opacity: 0;
     background-color: white;
     border: solid;
-    border-width: 2px;
+    border-width: 0px;
     border-radius: 20px;
     padding: 10px 15px;
     position: absolute;
@@ -168,4 +179,34 @@ html {
 
 .tooltip ul li {
     padding-bottom: 5px;
+}
+
+.controlPanel{
+    position: absolute;
+    background-color: whitesmoke;
+    width: 30%;
+    height: 60%;
+    z-index: 1;
+    right: 2%;
+    top: 21%;
+    border-radius: 30px;
+    box-shadow: 4px 4px 16px 4px rgba(0, 0, 0, 0.5);
+    border: 1px solid gray;
+}
+
+.controlPanel .cp-title{
+    text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 1.5vw ;
+}
+
+.controlPanel .yearControl{
+    position: relative;
+    width: 80%;
+    height: 50%;
+    background-color: #7e7b75;
+    left: 10%;
+    border-radius: 30px;
+    box-shadow: 4px 4px 16px 4px rgba(0, 0, 0, 0.5);
+
 }

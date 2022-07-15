@@ -2,6 +2,13 @@ const width = 1000;
 const height = 600;
 const margin = 20;
 const headerHeight = 40;
+const yearIndex= {
+    1990:2,
+    2000:4,
+    2010:6,
+    2019:8
+}
+var chosenYear= 2019;
 
 const svg = d3.select('svg')
     // .attr('width', width)
@@ -38,10 +45,10 @@ let mouseOver = (d) => {
         .text('Population: ' + dataset[d.srcElement.id][1].toLocaleString());
     
     tooltip.select('#temp')
-        .html('Temp Rise: <b>' + Number(dataset[d.srcElement.id][2]).toFixed(1) + ' &#8451;</b>');
+        .html('Temp Rise: <b>' + Number(dataset[d.srcElement.id][yearIndex[chosenYear]]).toFixed(1) + ' &#8451;</b>');
     
     tooltip.select('#co')
-        .html('CO<sub>2</sub> Emission: <b>' + Number(dataset[d.srcElement.id][3]).toFixed(2) + ' ton/capita</b>')
+        .html('CO<sub>2</sub> Emission: <b>' + Number(dataset[d.srcElement.id][yearIndex[chosenYear] + 1]).toFixed(2) + ' ton/capita</b>')
     
 }
 
@@ -55,7 +62,7 @@ let mouseLeave = (d)=>{
 
     tooltip
 
-        .style("opacity", 0.9)
+        .style("opacity", 0)
 }
 
 var dataset = {};
@@ -64,10 +71,12 @@ const path = d3.geoPath(projection);
 const map_g = svg.append('g')
 
 var redRange = ['#FFFFFF', '#B03A2E']
-var colorScale = d3.scaleLinear()
-                .range(redRange)
 var minDomain = -0.8;
 var maxDomain = 3.1;
+var colorScale = d3.scaleLinear()
+                .range(redRange)
+                .domain([minDomain,maxDomain ])
+
 
 const legendWidth = 300
 const legendHeigth = 20
@@ -114,12 +123,15 @@ promises.push(d3.csv('data/co2.csv'))
 Promise.all(promises)
     .then(([geoData, tempData,coData]) =>{
         geoData.features.forEach(d => {
-            dataset[d.properties.iso_a3] = [d.properties.name, d.properties.pop_est, 0,0]
+            dataset[d.properties.iso_a3] = [d.properties.name, d.properties.pop_est, 0,0,0,0,0,0,0,0]
         });
 
         tempData.forEach(d => {
             if (dataset[d.ISO3]) {
-                dataset[d.ISO3][2] = Number(d[2019]);
+                dataset[d.ISO3][2] = Number(d[1990]);
+                dataset[d.ISO3][4] = Number(d[2000]);
+                dataset[d.ISO3][6] = Number(d[2010]);
+                dataset[d.ISO3][8] = Number(d[2019]);
             }
             // else if (d.ISO3 == 'MAX') {
             //     maxDomain = Number(d.F2021);
@@ -130,7 +142,10 @@ Promise.all(promises)
 
         coData.forEach(d => {
             if (dataset[d.ISO3]) {
-                dataset[d.ISO3][3] = Number(d[2019])
+                dataset[d.ISO3][3] = Number(d[1990]);
+                dataset[d.ISO3][5] = Number(d[2000]);
+                dataset[d.ISO3][7] = Number(d[2010]);
+                dataset[d.ISO3][9] = Number(d[2019]);
             }
         })
 
@@ -145,7 +160,7 @@ Promise.all(promises)
             .on("mouseover", mouseOver)
             .on("mouseleave", mouseLeave)
             .attr("fill", d => {
-                return colorScale.domain([minDomain,maxDomain ])(dataset[d.properties.iso_a3][2])
+                return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear]])
             })
 
         var legendScale = d3.scaleLinear()
@@ -169,3 +184,22 @@ Promise.all(promises)
 
     })
 
+
+
+function yearSelect(year){
+    if(yearIndex[year]){
+        d3.select('#y'+ chosenYear).html(chosenYear)
+        d3.select('#y'+ year).html(year + ' &#10004;')
+        chosenYear = year;
+
+        d3.select('.map-label-text').html('Temp Increase for Year <b>'+ year +'</b>')
+
+        map_g.selectAll('path')
+        .transition()
+        .duration(200)
+        .attr("fill", d => {
+            return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear]])
+        })
+    } 
+    
+}
