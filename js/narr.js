@@ -10,7 +10,7 @@ const svg = d3.select('svg')
     //       "translate("+ margin+"," + (headerHeight + margin) + ")")
     .append("g")
     .attr("transform",
-        "translate(0,80)");
+        "translate(0,140)");
 
 var tooltip = d3.select("#tooltip")
 
