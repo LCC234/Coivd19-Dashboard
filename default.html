@@ -6,28 +6,37 @@
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
 	<script src="js/d3-annotation.js"></script>
+
 	<link rel="stylesheet" href="css/base.css">
 </head>
 
 <body>
-
-	<p>Global Map</p>
+	<div id="header" class="header">
+		<span class="header-title">The Climate Change Statistics</span>
+		<div class="dropdown">
+			<button class="dropbtn" onclick="toggledd()">Year</button>
+			<div class="dropdown-content" id="dropdown-content">
+				<a id="y1980" title="1980" onclick="yearSelect();return false;">1980</a>
+				<a id="y2000" title="2000" onclick="yearSelect();return false;">2000</a>
+				<a id="y2019" title="2019" onclick="yearSelect();return false;">2019 &#10004;</a>
+			</div>
+		</div>
+	</div>
 
 	<div id="tooltip" class="tooltip">
 		<h2 id="country">Country</h2>
 		<h5 id="pop">Population: </h5>
-		<hr/>
+		<hr />
 
 		<p id="temp" class="para"></p>
 		<p id="co" class="para"></p>
-		<!-- <ul>
-			<li id="temp">Temp: </li>
-			<li>Para2: </li>
-		</ul> -->
 	</div>
-	<svg></svg>
 
+	<div id="svg-container" class="svg-container">
+		<svg class="map-svg svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1000 600"></svg>
+	</div>
+
+	<!-- my scripts -->
 	<script src="js/narr.js"></script>
-	
-
+	<script src="js/main.js"></script>
 </body>

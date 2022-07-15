@@ -1,9 +1,16 @@
-const width = 900;
-const height = 500;
+const width = 1000;
+const height = 600;
+const margin = 20;
+const headerHeight = 40;
 
 const svg = d3.select('svg')
-    .attr('width', width)
-    .attr('height', height);
+    // .attr('width', width)
+    // .attr('height', height)
+    // .attr("transform",
+    //       "translate("+ margin+"," + (headerHeight + margin) + ")")
+    .append("g")
+    .attr("transform",
+        "translate(0,80)");
 
 var tooltip = d3.select("#tooltip")
 
@@ -24,7 +31,7 @@ let mouseOver = (d) => {
         .transition()
         .duration(200)
         
-        .style("opacity", 0.8)
+        .style("opacity", 0.9)
         .select('#country').text(dataset[d.srcElement.id][0]);
 
     tooltip.select('#pop')
@@ -48,7 +55,7 @@ let mouseLeave = (d)=>{
 
     tooltip
 
-        .style("opacity", 0.8)
+        .style("opacity", 0.9)
 }
 
 var dataset = {};
