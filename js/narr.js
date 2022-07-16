@@ -39,15 +39,18 @@ let mouseOver = (d) => {
         .duration(200)
         
         .style("opacity", 0.9)
-        .select('#country').text(dataset[d.srcElement.id][0]);
+        .select('#tooltip-country').text(dataset[d.srcElement.id][0]);
 
-    tooltip.select('#pop')
+    tooltip.select('#tooltip-year')
+        .html('Year: <b>' + chosenYear + '</b>');
+
+    tooltip.select('#tooltip-pop')
         .text('Population: ' + dataset[d.srcElement.id][1].toLocaleString());
     
-    tooltip.select('#temp')
+    tooltip.select('#tooltip-temp')
         .html('Temp Rise: <b>' + Number(dataset[d.srcElement.id][yearIndex[chosenYear]]).toFixed(1) + ' &#8451;</b>');
     
-    tooltip.select('#co')
+    tooltip.select('#tooltip-co')
         .html('CO<sub>2</sub> Emission: <b>' + Number(dataset[d.srcElement.id][yearIndex[chosenYear] + 1]).toFixed(2) + ' ton/capita</b>')
     
 }
@@ -188,11 +191,19 @@ Promise.all(promises)
 
 function yearSelect(year){
     if(yearIndex[year]){
-        d3.select('#y'+ chosenYear).html(chosenYear)
-        d3.select('#y'+ year).html(year + ' &#10004;')
+        d3.select('#y'+ chosenYear)
+            .html(chosenYear)
+            .classed('clicked', false)
+            .classed('unclicked', true);
+        d3.select('#y'+ year)
+            .html(year + ' &#10004;')
+            .classed('clicked', true)
+            .classed('unclicked', false);
         chosenYear = year;
 
-        d3.select('.map-label-text').html('Temp Increase for Year <b>'+ year +'</b>')
+        d3.select('.map-label-title').html('<b>'+ year +'</b>')
+
+        
 
         map_g.selectAll('path')
         .transition()

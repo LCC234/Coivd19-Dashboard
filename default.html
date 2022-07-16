@@ -12,8 +12,8 @@
 
 <body>
 	<div id="header" class="header">
-		<span class="header-title">The Climate Change Statistics</span>
-		<div class="dropdown">
+		<span class="header-title">Climate Change Dashboard</span>
+		<!-- <div class="dropdown">
 			<button class="dropbtn" onclick="toggle_dd()">Year</button>
 			<div class="dropdown-content" id="dropdown-content">
 				<a id="y1990" title="1990" onclick="yearSelect(1990);return false;">1990</a>
@@ -21,23 +21,23 @@
 				<a id="y2010" title="2000" onclick="yearSelect(2010);return false;">2010</a>
 				<a id="y2019" title="2019" onclick="yearSelect(2019);return false;">2019 &#10004;</a>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 	<div id="tooltip" class="tooltip">
-		<h2 id="country">Country</h2>
-		<h5 id="pop">Population: </h5>
+		<h2 id="tooltip-country">Country</h2>
+		<h5 id="tooltip-pop">Population: </h5>
 		<hr />
-
-		<p id="temp" class="para"></p>
-		<p id="co" class="para"></p>
+		<p id="tooltip-year" class="para"></p>
+		<p id="tooltip-temp" class="para"></p>
+		<p id="tooltip-co" class="para"></p>
 	</div>
 
 	<div id="svg-container" class="svg-container">
 		<svg class="map-svg svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1400 600"></svg>
 		<div id="map-label" class="map-label">
-			<p class="map-label-title">Global Warming Distrubtion</p>
-			<p class="map-label-text">Temp Increase for Year <b>2019</b></p>
+			<p class="map-label-title"><b>2019</b></p>
+			<p class="map-label-text">Global Warming Distribution</p>
 
 		</div>
 	</div>
@@ -45,9 +45,14 @@
 	<!-- Control Section -->
 
 	<div id="controlPanel" class="controlPanel">
-		<p class="cp-title">Parameter Control</p>
+		<!-- <p class="cp-title">Parameter Control</p> -->
 		<div id="yearControl" class="yearControl">
-
+			<p class="cp-title">Select a Year</p>
+			<hr />
+			<a id="y1990" title="1990" class="unclicked" onclick="yearSelect(1990);return false;">1990</a>
+			<a id="y2000" title="2000" class="unclicked" onclick="yearSelect(2000);return false;">2000</a>
+			<a id="y2010" title="2000" class="unclicked" onclick="yearSelect(2010);return false;">2010</a>
+			<a id="y2019" title="2019" class="clicked" onclick="yearSelect(2019);return false;">2019 &#10004;</a>
 		</div>
 	</div>
 
