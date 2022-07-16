@@ -1,6 +1,6 @@
 const width = 1000;
 const height = 600;
-const margin = 20;
+const margin = 25;
 const headerHeight = 40;
 const yearIndex= {
     1990:2,
@@ -33,9 +33,6 @@ let mouseOver = (d) => {
     tooltip
         .style("left", (d.pageX + 10) + "px")		
         .style("top", (d.pageY + 10) + "px")
-        .transition()
-        .duration(200)
-        
         .style("opacity", 0.9)
         .select('#tooltip-country').text(dataset[d.srcElement.id][0]);
 
@@ -61,9 +58,7 @@ let mouseLeave = (d)=>{
         .style("stroke", "#999")
         .style("stroke-width",1);
 
-    tooltip
-
-        .style("opacity", 0)
+    tooltip.style("opacity", 0)
 }
 
 var dataset = {};
@@ -212,7 +207,8 @@ function yearSelect(year){
 const sb_width = 1000
 const sb_height = 400
 var sb_svg = d3.select('#stackedbar-svg')
-                    .append('g');
+                    .append('g')
+                    .attr("transform", "translate(" + margin + "," + margin+ ")");;
 var sb_xAxis_svg = sb_svg.append("g")
             .attr("transform", "translate(0,"+sb_height+")")
 var sb_yAxis_svg = sb_svg.append("g")
