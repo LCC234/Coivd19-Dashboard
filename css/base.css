@@ -102,6 +102,16 @@ html {
     top: 21%;
 }
 
+.svg-container-stacked {
+    display: inline-block;
+    position: relative;
+    width: 80%;
+    height: 80%;
+    vertical-align: top;
+    margin-left: 20px;
+    top: 25%;
+}
+
 .svg-content {
     display: inline-block;
     position: absolute;
@@ -242,4 +252,8 @@ html {
 
 .unclicked{
     background-color: #e3e0da;
+}
+
+.displaynone{
+    display: none;
 }

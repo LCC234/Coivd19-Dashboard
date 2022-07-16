@@ -10,7 +10,7 @@ const yearIndex= {
 }
 var chosenYear= 2019;
 
-const svg = d3.select('svg')
+const map_svg = d3.select('#map-svg')
     // .attr('width', width)
     // .attr('height', height)
     // .attr("transform",
@@ -29,8 +29,6 @@ let mouseOver = (d) => {
         .style("opacity", 1)
         .style("stroke", "black")
         .style("stroke-width",2);
-    
-    console.log(d)
 
     tooltip
         .style("left", (d.pageX + 10) + "px")		
@@ -71,7 +69,7 @@ let mouseLeave = (d)=>{
 var dataset = {};
 const projection = d3.geoMercator();
 const path = d3.geoPath(projection);
-const map_g = svg.append('g')
+const map_g = map_svg.append('g')
 
 var redRange = ['#FFFFFF', '#B03A2E']
 var minDomain = -0.8;
@@ -85,7 +83,7 @@ const legendWidth = 300
 const legendHeigth = 20
 var legendInterval = []
 const tickNo = 5
-const legend_g = svg.append("g")
+const legend_g = map_svg.append("g")
                     .attr("transform", "translate(" + (width - legendWidth - 10) + ", 420)");
 
 
@@ -99,7 +97,7 @@ const legendAxis_g = legend_g.append("g")
 .attr("transform", "translate(0, "+ (legendHeigth) +")");
 
 
-var defs = svg.append("defs");
+var defs = map_svg.append("defs");
 var linearGradient = defs.append("linearGradient")
                         .attr("id", "linearGradient")
 
@@ -151,10 +149,6 @@ Promise.all(promises)
                 dataset[d.ISO3][9] = Number(d[2019]);
             }
         })
-
-        console.log(dataset)
-        console.log(maxDomain)
-        console.log(minDomain)
 
         map_g.selectAll('path').data(geoData.features).enter()
             .append('path').attr('class', 'country')
@@ -214,3 +208,95 @@ function yearSelect(year){
     } 
     
 }
+
+const sb_width = 1000
+const sb_height = 400
+var sb_svg = d3.select('#stackedbar-svg')
+                    .append('g');
+var sb_xAxis_svg = sb_svg.append("g")
+            .attr("transform", "translate(0,"+sb_height+")")
+var sb_yAxis_svg = sb_svg.append("g")
+var sb_bars_svg = sb_svg.append("g")
+var countryData = {};
+var dateList = [];
+const disastersList = ['drought', 'extremetemp','flood','landslide','storm','wildfire'];
+const sb_colorList = ['#264653','#2a9d8f','#e9c46a','#f4a261','#e76f51','#a2d2ff'];
+var minYDomain = 0;
+var maxYDomain = 43;
+var xAxisBand ;
+var yAxisBand ;
+var sb_colorScale;
+var stackedCountryData;
+// Stacked bar
+function genStackedBar(country){
+    if (dataset[country]) {
+        
+        d3.select('#svg-container-stacked').classed('displaynone', false)
+
+        d3.csv('data/disasters_freq.csv').then(data => {
+            countryData = data.filter((obj) => {
+                return obj.ISO3 == country;
+            })
+            
+            if(countryData && Object.keys(countryData).length === 0
+                && Object.getPrototypeOf(countryData) === Object.prototype){
+                    return false;
+            }
+
+            dateList = countryData.map((d) => {
+                return d.Date;
+            })
+
+            maxYDomain = Math.max(...countryData.map((d) => {
+                return d.Total;
+            }))
+
+            xAxisBand = d3.scaleBand()
+                    .domain(dateList)
+                    .range([0,sb_width])
+                    .padding([0.2]);
+            
+            sb_xAxis_svg.call(d3.axisBottom(xAxisBand).tickSizeOuter(0));
+
+            yAxisBand = d3.scaleLinear()
+                        .domain([0,(maxYDomain + 1)])
+                        .range([sb_height,0]);
+
+            sb_yAxis_svg.call(d3.axisLeft(yAxisBand));
+            
+            sb_colorScale = d3.scaleOrdinal()
+                            .domain(disastersList)
+                            .range(sb_colorList);
+            
+            stackedCountryData = d3.stack()
+                            .keys(disastersList)(countryData)
+            
+            sb_bars_svg.html('')
+                    .selectAll("g")
+                    .data(stackedCountryData)
+                    .enter().append("g")
+                    .attr("fill", function (d) { 
+                        console.log(d)
+                        return sb_colorScale(d.key); 
+                    })
+                    .selectAll("rect")
+                    .data(function (d) { return d; })
+                    .enter().append("rect")
+                    .attr('x', (d) => {
+                        
+                        return xAxisBand(d.data.Date)
+                    })
+                    .attr('y', (d)=>{
+                        
+                        return yAxisBand(d[1]); 
+                    })
+                    .attr('height', (d) => {
+                        return yAxisBand(d[0]) - yAxisBand(d[1]);
+                    })
+                    .attr("width", xAxisBand.bandwidth())
+        })
+    }
+
+    
+};
+
