@@ -50,6 +50,8 @@ let mouseOver = (d) => {
     
 }
 
+
+
 let mouseLeave = (d)=>{
     d3.selectAll(".country")
         .style("opacity", 1);
@@ -213,6 +215,7 @@ var sb_xAxis_svg = sb_svg.append("g")
             .attr("transform", "translate(0,"+sb_height+")")
 var sb_yAxis_svg = sb_svg.append("g")
 var sb_bars_svg = sb_svg.append("g")
+var sb_tooltip = d3.select('#stackedbar-tooltip')
 var countryData = {};
 var dateList = [];
 const disastersList = ['drought', 'extremetemp','flood','landslide','storm','wildfire'];
@@ -225,6 +228,7 @@ var sb_colorScale;
 var stackedCountryData;
 // Stacked bar
 function genStackedBar(country){
+
     if (dataset[country]) {
         
         d3.select('#svg-container-stacked').classed('displaynone', false)
@@ -278,6 +282,7 @@ function genStackedBar(country){
                     .selectAll("rect")
                     .data(function (d) { return d; })
                     .enter().append("rect")
+                    .attr('details', (d) => console.log(d))
                     .attr('x', (d) => {
                         
                         return xAxisBand(d.data.Date)
@@ -290,9 +295,32 @@ function genStackedBar(country){
                         return yAxisBand(d[0]) - yAxisBand(d[1]);
                     })
                     .attr("width", xAxisBand.bandwidth())
+                    .on("mouseover", sb_mouseover)
+                    .on("mousemove", sb_mousemove)
+                    .on("mouseleave", sb_mouseleave)
+
         })
     }
 
     
 };
+
+var sb_mouseover = (d) => {
+    console.log(d)
+    sb_tooltip
+        .style("left", (d.pageX + 10) + "px")		
+        .style("top", (d.pageY + 10) + "px")
+        .style("opacity", 0.8)
+}
+
+var sb_mousemove = (d) => {
+    sb_tooltip
+        .style("left", (d.pageX + 10) + "px")		
+        .style("top", (d.pageY + 10) + "px")
+}
+
+var sb_mouseleave = (d) => {
+    sb_tooltip
+        .style("opacity", 0)
+}
 

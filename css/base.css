@@ -106,16 +106,6 @@ html {
     top: 21%;
 }
 
-.svg-container-stacked {
-    display: inline-block;
-    position: relative;
-    width: 80%;
-    height: 80%;
-    vertical-align: top;
-    margin-left: 20px;
-    top: 25%;
-}
-
 .svg-content {
     display: inline-block;
     position: absolute;
@@ -251,6 +241,31 @@ html {
 .controlPanel .yearControl a:hover {
     background-color: rgb(199 194 194);
 }
+
+.svg-container-stacked {
+    display: inline-block;
+    position: relative;
+    width: 80%;
+    height: 80%;
+    vertical-align: top;
+    margin-left: 20px;
+    top: 25%;
+}
+
+.stackedbar-tooltip{
+    opacity: 0;
+    background-color: white;
+    padding: 10px;
+    position: absolute;
+    z-index: 2;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+
+
+
+
 
 .clicked{
     background-color: rgb(199 194 194);
