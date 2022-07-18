@@ -37,7 +37,7 @@
 
 	<div id="controlPanel" class="controlPanel">
 		<!-- <p class="cp-title">Parameter Control</p> -->
-		<div id="yearControl" class="yearControl">
+		<div id="yearControl" class="control yearControl">
 			<p class="cp-title">Select a Year</p>
 			<hr />
 			<a id="y1990" title="1990" class="unclicked" onclick="yearSelect(1990);return false;">1990</a>
@@ -45,6 +45,14 @@
 			<a id="y2010" title="2000" class="unclicked" onclick="yearSelect(2010);return false;">2010</a>
 			<a id="y2019" title="2019" class="clicked" onclick="yearSelect(2019);return false;">2019 &#10004;</a>
 		</div>
+
+    <div id="scaleControl" class="control scaleControl">
+      <p class="cp-title">Select Scale</p>
+			<hr />
+			<a id="temp" title="Temperature" class="clicked" onclick="scaleSelect('temp');return false;">Temperature</a>
+			<a id="co2" title="Carbon Dioxide" class="unclicked" onclick="scaleSelect('co2');return false;">CO<sub>2</sub> Emissions</a>
+    </div>
+
 	</div>
 
 

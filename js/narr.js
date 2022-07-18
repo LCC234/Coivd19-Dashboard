@@ -9,6 +9,7 @@ const yearIndex= {
     2019:8
 }
 var chosenYear= 2019;
+var chosenScale = 'temp';
 
 const map_svg = d3.select('#map-svg')
     // .attr('width', width)
@@ -69,11 +70,17 @@ const path = d3.geoPath(projection);
 const map_g = map_svg.append('g')
 
 var redRange = ['#FFFFFF', '#B03A2E']
-var minDomain = -0.8;
-var maxDomain = 3.1;
-var colorScale = d3.scaleLinear()
-                .range(redRange)
-                .domain([minDomain,maxDomain ])
+var blueRange = ['#FFFFFF' ,'#2e73b0']
+var minDomain_temp = -0.8;
+var maxDomain_temp = 3.1;
+var minDomain_co = 0;
+var maxDomain_co = 49;
+
+var scaleConfig = {
+    'temp': [redRange,minDomain_temp,maxDomain_temp,0,'Global Warming Distribution', 'Temperature'],
+    'co2':[blueRange,minDomain_co,maxDomain_co,1, 'Global CO<sub>2</sub> Distribution', 'CO<sub>2</sub> Emissions']
+}
+
 
 
 const legendWidth = 300
@@ -98,20 +105,12 @@ var defs = map_svg.append("defs");
 var linearGradient = defs.append("linearGradient")
                         .attr("id", "linearGradient")
 
-linearGradient.selectAll('stop')
-.data(redRange)
-.enter()
-.append('stop')
-.style('stop-color', function(d){ return d; })
-.attr('offset', function(d,i){
-  return 100 * (i / (redRange.length - 1)) + '%';
-})
 
 
-const legendRect = legend_g.append("rect")
+var legendRect = legend_g.append("rect")
                     .attr("width", legendWidth)
                     .attr("height", legendHeigth)
-                    .style("fill", "url(#linearGradient)");
+
 var promises = []
 promises.push(d3.json('data/geo.json'))
 promises.push(d3.csv('data/temp.csv'))
@@ -165,6 +164,8 @@ Promise.all(promises)
                         label.html('<b>' + dataset[countryCode][0] + '</b>')
                         textDes.html('Disasters Frequency Chart (Climate-related)')
                         sb_svg.classed('displaynone',false)
+                        
+
                     })
                     .catch((e) => {
                         console.log(e)
@@ -172,6 +173,9 @@ Promise.all(promises)
                         textDes.html('Please select another country.')
                         sb_svg.classed('displaynone',true)
                     })
+                    .finally((d)=>{
+                        scrollToDetails()
+                    } )
 
                 // if(genStackedBar(countryCode)){
                 //     label.html(dataset[countryCode][0])
@@ -179,35 +183,28 @@ Promise.all(promises)
                 //     label.html('Sorry...no available dataset for ' + dataset[countryCode][0])
                 // }
             })
-            .attr("fill", d => {
-                return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear]])
-            })
 
-        var legendScale = d3.scaleLinear()
-            .range([0, legendWidth])
-            .domain([minDomain, maxDomain]);
-        
-        
-        var interpo = d3.interpolate(minDomain,maxDomain)
 
-        for (let i = 0; i < tickNo + 1; i++) {
-            legendInterval.push(interpo(i/tickNo));    
-        }
-        
-        var legendAxis = d3.axisBottom(legendScale)
-            .tickSize(legendHeigth * 0.5)
-            .tickValues(legendInterval);
-
-        legendAxis_g.call(legendAxis)
-            .select('path').attr('stroke', 'none');
-
+            scaleSelect(chosenScale);
 
     })
 
+function scrollToDetails(){
+    const yOffset = -80; 
+    var drilldown = document.getElementById("drill-down-title")
+    const y = drilldown.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    
+    window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+    })
+}
 
 
 function yearSelect(year){
     if(yearIndex[year]){
+        var offset = scaleConfig[chosenScale][3]
+
         d3.select('#y'+ chosenYear)
             .html(chosenYear)
             .classed('clicked', false)
@@ -226,11 +223,78 @@ function yearSelect(year){
         .transition()
         .duration(200)
         .attr("fill", d => {
-            return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear]])
+            return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear] + offset])
         })
     } 
     
 }
+
+
+function scaleSelect(scale){
+    if (scaleConfig[scale]) {
+        
+        var colorRange = scaleConfig[scale][0]
+        var minDomain = scaleConfig[scale][1]
+        var maxDomain = scaleConfig[scale][2]
+        var offset = scaleConfig[scale][3]
+        var des = scaleConfig[scale][4]
+
+        colorScale = d3.scaleLinear()
+                .range(colorRange)
+                .domain([minDomain,maxDomain])
+
+        var legendScale = d3.scaleLinear()
+                .range([0, legendWidth])
+                .domain([minDomain, maxDomain]);
+        
+        var interpo = d3.interpolate(minDomain,maxDomain)
+
+        var legendInterval = []
+
+        for (let i = 0; i < tickNo + 1; i++) {
+            legendInterval.push(interpo(i/tickNo));    
+        }
+
+        var legendAxis = d3.axisBottom(legendScale)
+            .tickSize(legendHeigth * 0.5)
+            .tickValues(legendInterval);
+
+        legendAxis_g.call(legendAxis)
+            .select('path').attr('stroke', 'none');
+
+        map_g.selectAll('path').attr("fill", d => {
+            return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear] + offset])
+        })
+
+        linearGradient.html('').selectAll('stop')
+        .data(colorRange)
+        .enter()
+        .append('stop')
+        .style('stop-color', function(d){ return d; })
+        .attr('offset', function(d,i){
+        return 100 * (i / (colorRange.length - 1)) + '%';
+        })
+
+        legendRect.style("fill", "url(#linearGradient)");
+
+        d3.select('#'+chosenScale)
+            .html(scaleConfig[chosenScale][5])
+            .classed('clicked', false)
+            .classed('unclicked', true);
+
+        d3.select('#'+scale)
+            .html(scaleConfig[scale][5] + ' &#10004;')
+            .classed('clicked', true)
+            .classed('unclicked', false);
+        
+        
+        d3.select('#map-label-text').html(des)
+
+        chosenScale=scale;
+    }
+
+}
+
 
 const sb_width = 1000
 const sb_height = 400

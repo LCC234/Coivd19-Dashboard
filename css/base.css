@@ -201,6 +201,7 @@ html {
     /* border-radius: 30px; */
     box-shadow: 4px 4px 16px 4px rgba(0, 0, 0, 0.5);
     border: 1px solid gray;
+    min-width: 200px;
 }
 
 .controlPanel .cp-title{
@@ -210,23 +211,35 @@ html {
     margin-top: 0;
 }
 
-.controlPanel .yearControl{
+.controlPanel .control{
     position: absolute;
-    width: 45%;
-    height: 40%;
     background-color: #e3e0da;
     left: 22.5%;
     border-radius: 30px;
     box-shadow: 4px 4px 16px 4px rgba(0, 0, 0, 0.5);
     padding: 5%;
+    width: 45%;
+
+}
+
+.controlPanel .yearControl{
+    
+    height: 40%;
     top: 15%;
     min-width: 100px;
     min-height: 160px;
 
 }
 
+.controlPanel .scaleControl{
+    top: 65%;
 
-.controlPanel .yearControl a{
+}
+
+
+
+
+.controlPanel .control a{
     position: relative;
     width: 100%;
     cursor:pointer;
@@ -241,7 +254,7 @@ html {
 
 
 }
-.controlPanel .yearControl a:hover {
+.controlPanel .control a:hover {
     background-color: rgb(199 194 194);
 }
 
