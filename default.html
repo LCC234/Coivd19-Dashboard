@@ -31,6 +31,12 @@
 			<p id="map-label-text" class="chart-label-text">Global Warming Distribution</p>
 
 		</div>
+
+    <div id="maphelp-label" class="chart-label">
+			<p id="maphelp-label-text" class="chart-label-text"><b>Hover Over</b> or <b>Click</b> on the countries<br>for more drilldowns :)</p>
+
+		</div>
+
 	</div>
 
 	<!-- Control Section -->
@@ -59,11 +65,12 @@
 	<!-- Drill Down Charts -->
 
   <p id="drill-down-title" class="drill-down-title">Lets drill down further...</p>
+  <p id="drill-down-text" class="drill-down-text">Click on the countries for deeper dives :)</p>
 
 	<div id="stackedbar-tooltip" class="stackedbar-tooltip">
 	</div>
 	<div id="svg-container-stacked" class="svg-container-stacked displaynone">
-		<svg id="stackedbar-svg" class="svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 700"></svg>
+		<svg id="stackedbar-svg" class="svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 700" transform="translate(0,0)"></svg>
 
 		<div id="stackedbar-label" class="chart-label">
 			<p id="stackedbar-title" class="chart-label-title"></p>
@@ -71,11 +78,18 @@
 
 		</div>
 	</div>
+
+ 
+  <div id="footer" class="footer">
+    <span class="footer-auth">
+      <p>2022 July, Illustrated by<br><b>Chun Chie, Lee</b></p>
+    </span>
+    <span class="footer-ref">
+      <p><u>Data References:</u><br>International Monetary Fund (IMF) Climate Change Data</p>
+    </span>
+    
+  </div>
 	<!-- my scripts -->
 	<script src="js/narr.js"></script>
-	<!-- <script>
-		setTimeout(() => {genStackedBar('ARM')},100)
-		
 
-	</script> -->
 </body>

@@ -174,6 +174,7 @@ Promise.all(promises)
                         sb_svg.classed('displaynone',true)
                     })
                     .finally((d)=>{
+                        d3.select('#drill-down-text').html('')
                         scrollToDetails()
                     } )
 
@@ -302,9 +303,13 @@ var sb_svg = d3.select('#stackedbar-svg')
                     .append('g')
                     .attr("transform", "translate(" + margin + "," + margin+ ")");;
 var sb_xAxis_svg = sb_svg.append("g")
-            .attr("transform", "translate(0,"+sb_height+")")
+            .attr("transform", "translate(0,"+(sb_height+150) +")")
 var sb_yAxis_svg = sb_svg.append("g")
+                    .attr("transform", "translate(0,150)")
 var sb_bars_svg = sb_svg.append("g")
+                    .attr("transform", "translate(0,150)")
+var sb_legend_svg = sb_svg.append("g")
+                    .attr("transform", "translate("+(sb_width * 0.75)+",-100)")
 var sb_tooltip = d3.select('#stackedbar-tooltip')
 var countryData = {};
 var dateList = [];
@@ -315,8 +320,42 @@ var minYDomain = 0;
 var maxYDomain = 43;
 var xAxisBand ;
 var yAxisBand ;
-var sb_colorScale;
+var sb_colorScale = d3.scaleOrdinal()
+                                .domain(disastersList)
+                                .range(sb_colorList);
 var stackedCountryData;
+
+//legend
+sb_legend_svg.selectAll('circle')
+    .data(disastersNameList)
+    .enter()
+    .append("circle")
+    .attr("cx", 100)
+    .attr("cy", function(d,i){ return 100 + i*25})
+    .attr("r", 7)
+    .style("fill", function(d){ return sb_colorScale(d)})
+
+// sb_legend_svg.append("rect")
+//     .attr("width", 150)
+//     .attr("height", 300)
+//     .attr("stroke", "#000000")
+//     .attr("stroke-width", 1)
+//     .attr('fill','none')
+//     .attr('x',0)
+//     .attr('y',0)
+
+sb_legend_svg.selectAll("mylabels")
+    .data(disastersNameList)
+    .enter()
+    .append("text")
+    .attr("x", 120)
+    .attr("y", function(d,i){ return 100 + i*25}) 
+    .style("fill", function(d){ return sb_colorScale(d)})
+    .text(function(d){ return d})
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+
+
 // Stacked bar
 var genStackedBar = 
 function stackedBar(country){
@@ -357,9 +396,7 @@ function stackedBar(country){
     
                 sb_yAxis_svg.call(d3.axisLeft(yAxisBand).tickValues(d3.range(maxYDomain + 1)));
                 
-                sb_colorScale = d3.scaleOrdinal()
-                                .domain(disastersList)
-                                .range(sb_colorList);
+                
                 
                 stackedCountryData = d3.stack()
                                 .keys(disastersList)(countryData)
@@ -409,11 +446,13 @@ var sb_mouseover = (d) => {
     var dName = disastersNameList[index];
     var dAmt = d3.select(d.srcElement).data()[0].data[disastersList[index]]
 
+    var date = d3.select(d.srcElement).data()[0].data["Date"]
+    
     sb_tooltip
         .style("left", (d.pageX + 10) + "px")		
         .style("top", (d.pageY + 10) + "px")
         .style("opacity", 0.8)
-        .html(dName + ': ' + dAmt)
+        .html('Year: '+date + '</br>' + dName + ': ' + dAmt)
 }
 
 var sb_mousemove = (d) => {
