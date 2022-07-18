@@ -153,6 +153,32 @@ Promise.all(promises)
             .attr('id', d => d.properties.iso_a3)
             .on("mouseover", mouseOver)
             .on("mouseleave", mouseLeave)
+            .on("click", d => {
+                var label = d3.select('#stackedbar-title')
+                var textDes = d3.select('#stackedbar-text')
+                var sb_svg = d3.select('#stackedbar-svg') 
+                var countryCode = d.srcElement.id
+                console.log(countryCode)
+                genStackedBar(countryCode)
+                    .then((d) => {
+                        console.log(d)
+                        label.html('<b>' + dataset[countryCode][0] + '</b>')
+                        textDes.html('Disasters Frequency Chart (Climate-related)')
+                        sb_svg.classed('displaynone',false)
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                        label.html('Sorry...no available dataset for ' + dataset[countryCode][0] + ' :(')
+                        textDes.html('Please select another country.')
+                        sb_svg.classed('displaynone',true)
+                    })
+
+                // if(genStackedBar(countryCode)){
+                //     label.html(dataset[countryCode][0])
+                // }else{
+                //     label.html('Sorry...no available dataset for ' + dataset[countryCode][0])
+                // }
+            })
             .attr("fill", d => {
                 return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear]])
             })
@@ -192,7 +218,7 @@ function yearSelect(year){
             .classed('unclicked', false);
         chosenYear = year;
 
-        d3.select('.map-label-title').html('<b>'+ year +'</b>')
+        d3.select('#map-label-title').html('<b>'+ year +'</b>')
 
         
 
@@ -219,6 +245,7 @@ var sb_tooltip = d3.select('#stackedbar-tooltip')
 var countryData = {};
 var dateList = [];
 const disastersList = ['drought', 'extremetemp','flood','landslide','storm','wildfire'];
+const disastersNameList = ['Drought', 'Extreme Temperature','Flood','Landslide','Storm','Wildfire'];
 const sb_colorList = ['#264653','#2a9d8f','#e9c46a','#f4a261','#e76f51','#a2d2ff'];
 var minYDomain = 0;
 var maxYDomain = 43;
@@ -227,90 +254,102 @@ var yAxisBand ;
 var sb_colorScale;
 var stackedCountryData;
 // Stacked bar
-function genStackedBar(country){
-
-    if (dataset[country]) {
-        
-        d3.select('#svg-container-stacked').classed('displaynone', false)
-
-        d3.csv('data/disasters_freq.csv').then(data => {
-            countryData = data.filter((obj) => {
-                return obj.ISO3 == country;
-            })
+var genStackedBar = 
+function stackedBar(country){
+    return new Promise(function(resolve, reject)
+    {
+        console.log('genStackedBar called')
+        if (dataset[country]) {
             
-            if(countryData && Object.keys(countryData).length === 0
-                && Object.getPrototypeOf(countryData) === Object.prototype){
-                    return false;
-            }
-
-            dateList = countryData.map((d) => {
-                return d.Date;
-            })
-
-            maxYDomain = Math.max(...countryData.map((d) => {
-                return d.Total;
-            }))
-
-            xAxisBand = d3.scaleBand()
-                    .domain(dateList)
-                    .range([0,sb_width])
-                    .padding([0.2]);
-            
-            sb_xAxis_svg.call(d3.axisBottom(xAxisBand).tickSizeOuter(0));
-
-            yAxisBand = d3.scaleLinear()
-                        .domain([0,(maxYDomain + 1)])
-                        .range([sb_height,0]);
-
-            sb_yAxis_svg.call(d3.axisLeft(yAxisBand));
-            
-            sb_colorScale = d3.scaleOrdinal()
-                            .domain(disastersList)
-                            .range(sb_colorList);
-            
-            stackedCountryData = d3.stack()
-                            .keys(disastersList)(countryData)
-            
-            sb_bars_svg.html('')
-                    .selectAll("g")
-                    .data(stackedCountryData)
-                    .enter().append("g")
-                    .attr("fill", function (d) { 
-                        console.log(d)
-                        return sb_colorScale(d.key); 
-                    })
-                    .selectAll("rect")
-                    .data(function (d) { return d; })
-                    .enter().append("rect")
-                    .attr('details', (d) => console.log(d))
-                    .attr('x', (d) => {
-                        
-                        return xAxisBand(d.data.Date)
-                    })
-                    .attr('y', (d)=>{
-                        
-                        return yAxisBand(d[1]); 
-                    })
-                    .attr('height', (d) => {
-                        return yAxisBand(d[0]) - yAxisBand(d[1]);
-                    })
-                    .attr("width", xAxisBand.bandwidth())
-                    .on("mouseover", sb_mouseover)
-                    .on("mousemove", sb_mousemove)
-                    .on("mouseleave", sb_mouseleave)
-
-        })
-    }
-
+            d3.select('#svg-container-stacked').classed('displaynone', false)
     
-};
+            d3.csv('data/disasters_freq.csv').then(data => {
+                countryData = data.filter((obj) => {
+                    return obj.ISO3 == country;
+                })
+    
+                if(Object.keys(countryData).length === 0){
+                        return reject(false);
+                }
+    
+                dateList = countryData.map((d) => {
+                    return d.Date;
+                })
+    
+                maxYDomain = Math.max(...countryData.map((d) => {
+                    return d.Total;
+                }))
+    
+                xAxisBand = d3.scaleBand()
+                        .domain(dateList)
+                        .range([0,sb_width])
+                        .padding([0.2]);
+                
+                sb_xAxis_svg.call(d3.axisBottom(xAxisBand).tickSizeOuter(0));
+    
+                yAxisBand = d3.scaleLinear()
+                            .domain([0,(maxYDomain)])
+                            .range([sb_height,0]);
+    
+                sb_yAxis_svg.call(d3.axisLeft(yAxisBand).tickValues(d3.range(maxYDomain + 1)));
+                
+                sb_colorScale = d3.scaleOrdinal()
+                                .domain(disastersList)
+                                .range(sb_colorList);
+                
+                stackedCountryData = d3.stack()
+                                .keys(disastersList)(countryData)
+                
+                sb_bars_svg.html('')
+                        .selectAll("g")
+                        .data(stackedCountryData)
+                        .enter().append("g")
+                        .attr("fill", function (d) { 
+                            return sb_colorScale(d.key); 
+                        })
+                        .selectAll("rect")
+                        .data(function (d) { return d; })
+                        .enter().append("rect")
+                        .attr('x', (d) => {
+                            
+                            return xAxisBand(d.data.Date)
+                        })
+                        .attr('y', (d)=>{
+                            
+                            return yAxisBand(d[1]); 
+                        })
+                        .attr('height', (d) => {
+                            return yAxisBand(d[0]) - yAxisBand(d[1]);
+                        })
+                        .attr("width", xAxisBand.bandwidth())
+                        .on("mouseover", sb_mouseover)
+                        .on("mousemove", sb_mousemove)
+                        .on("mouseleave", sb_mouseleave)
+                
+                        return resolve(true);
+            })
+            
+        }
+        else{
+            return reject(false);
+        }
+    
+    })
+}
+    
+    
+
 
 var sb_mouseover = (d) => {
-    console.log(d)
+    var index = d3.select(d.srcElement.parentNode).datum().index;
+    var dName = disastersNameList[index];
+    var dAmt = d3.select(d.srcElement).data()[0].data[disastersList[index]]
+
     sb_tooltip
         .style("left", (d.pageX + 10) + "px")		
         .style("top", (d.pageY + 10) + "px")
         .style("opacity", 0.8)
+        .html(dName + ': ' + dAmt)
 }
 
 var sb_mousemove = (d) => {

@@ -26,9 +26,9 @@
 
 	<div id="svg-container-map" class="svg-container">
 		<svg id="map-svg" class="map-svg svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1400 600"></svg>
-		<div id="map-label" class="map-label">
-			<p class="map-label-title"><b>2019</b></p>
-			<p class="map-label-text">Global Warming Distribution</p>
+		<div id="map-label" class="chart-label">
+			<p id="map-label-title" class="chart-label-title"><b>2019</b></p>
+			<p id="map-label-text" class="chart-label-text">Global Warming Distribution</p>
 
 		</div>
 	</div>
@@ -49,19 +49,25 @@
 
 
 	<!-- Drill Down Charts -->
-	<div id="stackedbar-tooltip" class="stackedbar-tooltip">
-		hihi
-	</div>
 
+  <p id="drill-down-title" class="drill-down-title">Lets drill down further...</p>
+
+	<div id="stackedbar-tooltip" class="stackedbar-tooltip">
+	</div>
 	<div id="svg-container-stacked" class="svg-container-stacked displaynone">
 		<svg id="stackedbar-svg" class="svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 700"></svg>
-		
+
+		<div id="stackedbar-label" class="chart-label">
+			<p id="stackedbar-title" class="chart-label-title"></p>
+			<p id="stackedbar-text" class="chart-label-text"></p>
+
+		</div>
 	</div>
 	<!-- my scripts -->
 	<script src="js/narr.js"></script>
-	<script>
+	<!-- <script>
 		setTimeout(() => {genStackedBar('ARM')},100)
 		
 
-	</script>
+	</script> -->
 </body>
