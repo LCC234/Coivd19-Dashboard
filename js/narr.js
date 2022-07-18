@@ -44,10 +44,10 @@ let mouseOver = (d) => {
         .text('Population: ' + dataset[d.srcElement.id][1].toLocaleString());
     
     tooltip.select('#tooltip-temp')
-        .html('Temp Rise: <b>' + Number(dataset[d.srcElement.id][yearIndex[chosenYear]]).toFixed(1) + ' &#8451;</b>');
+        .html('Surface Temp Rise: <b>' + Number(dataset[d.srcElement.id][yearIndex[chosenYear]]).toFixed(1) + ' &#8451;</b>');
     
     tooltip.select('#tooltip-co')
-        .html('CO<sub>2</sub> Emission: <b>' + Number(dataset[d.srcElement.id][yearIndex[chosenYear] + 1]).toFixed(2) + ' ton/capita</b>')
+        .html('CO<sub>2</sub> Emission: <b>' + Number(dataset[d.srcElement.id][yearIndex[chosenYear] + 1]).toFixed(2) + ' Metric Ton/Capita</b>')
     
 }
 
@@ -77,8 +77,8 @@ var minDomain_co = 0;
 var maxDomain_co = 49;
 
 var scaleConfig = {
-    'temp': [redRange,minDomain_temp,maxDomain_temp,0,'Global Warming Distribution', 'Temperature'],
-    'co2':[blueRange,minDomain_co,maxDomain_co,1, 'Global CO<sub>2</sub> Distribution', 'CO<sub>2</sub> Emissions']
+    'temp': [redRange,minDomain_temp,maxDomain_temp,0,'Global Warming Distribution', 'Surface Temperature Rise', 'Temperature (&#8451;)'],
+    'co2':[blueRange,minDomain_co,maxDomain_co,1, 'Global CO<sub>2</sub> Distribution', 'CO<sub>2</sub> Emissions', 'CO<sub>2</sub> Emissions (Metric Ton/Capita)']
 }
 
 
@@ -91,8 +91,7 @@ const legend_g = map_svg.append("g")
                     .attr("transform", "translate(" + (width - legendWidth - 10) + ", 420)");
 
 
-legend_g.append('text')
-    .html('Temperature (&#8451;)')
+var legend_text_svg = legend_g.append('text')
     .attr('x',0)
     .attr('y',-8)
     .style('font-size','90%')
@@ -150,6 +149,7 @@ Promise.all(promises)
             .append('path').attr('class', 'country')
             .attr('d', path)
             .attr('id', d => d.properties.iso_a3)
+            .classed('cursor-pointer',true)
             .on("mouseover", mouseOver)
             .on("mouseleave", mouseLeave)
             .on("click", d => {
@@ -277,6 +277,8 @@ function scaleSelect(scale){
         })
 
         legendRect.style("fill", "url(#linearGradient)");
+
+        legend_text_svg.html(scaleConfig[scale][6])
 
         d3.select('#'+chosenScale)
             .html(scaleConfig[chosenScale][5])
