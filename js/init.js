@@ -354,7 +354,7 @@ d3.csv('data/disasters_freq.csv').then((disaData) =>{
 
     var yAxisBand = d3.scaleLinear()
                             .domain([0,(maxYDomain)])
-                            .range([sb_height,0]);
+                            .range([init_sb_height,0]);
     
     sb_yAxis_svg.call(d3.axisLeft(yAxisBand));
 

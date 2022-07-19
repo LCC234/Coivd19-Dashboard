@@ -8,6 +8,9 @@ const yearIndex= {
     2010:6,
     2019:8
 }
+
+
+
 var chosenYear= 2019;
 var chosenScale = 'temp';
 
@@ -76,11 +79,11 @@ var maxDomain_temp = 3.1;
 var minDomain_co = 0;
 var maxDomain_co = 49;
 
+
 var scaleConfig = {
     'temp': [redRange,minDomain_temp,maxDomain_temp,0,'Global Warming Distribution', 'Surface Temperature Rise', 'Temperature (&#8451;)',false],
     'co2':[blueRange,minDomain_co,maxDomain_co,1, 'Global CO<sub>2</sub> Distribution', 'CO<sub>2</sub> Emissions', 'CO<sub>2</sub> Emissions (Metric Ton/Capita)',true]
 }
-
 
 
 const legendWidth = 300
@@ -109,6 +112,11 @@ var linearGradient = defs.append("linearGradient")
 var legendRect = legend_g.append("rect")
                     .attr("width", legendWidth)
                     .attr("height", legendHeigth)
+
+
+
+// Annotation
+var map_Annotations_svg = map_svg.append("g")
 
 var promises = []
 promises.push(d3.json('data/geo.json'))
@@ -202,6 +210,110 @@ function scrollToDetails(){
 }
 
 
+
+const map_anno_config = {
+    '2019-temp': {
+        x: 520,
+        y: 310,
+        dy: 50,
+        dx: -40,
+        label: "Highest Temp Rise in 2019: 2.7 ℃",
+        title: "Namibia",
+        color:"#8a2b21"
+    },
+    '2010-temp':{
+        x: 370,
+        y: -50,
+        dy: 300,
+        dx: -150,
+        label: "Highest Temp Rise in 2010: 3.0 ℃",
+        title: "Greenland",
+        color:"#8a2b21"
+    },
+    '2000-temp':{
+        x: 550,
+        y: 55,
+        dy: 300,
+        dx: -80,
+        label: "Highest Temp Rise in 2000: 2.0 ℃",
+        title: "Estonia",
+        color:"#8a2b21"
+    },
+    '1990-temp':{
+        x: 505,
+        y: 68,
+        dy: 300,
+        dx: -50,
+        label: "Highest Temp Rise in 1990: 1.8 ℃",
+        title: "Denmark",
+        color:"#8a2b21"
+    },
+    '2019-co2': {
+        x: 616,
+        y: 180,
+        dy: 150,
+        dx: -100,
+        label: "Highest CO2 Release in 2019: 32.47 ton/capita",
+        title: "Qatar",
+        color:"#1d588c"
+    },
+    '2010-co2': {
+        x: 616,
+        y: 180,
+        dy: 150,
+        dx: -100,
+        label: "Highest CO2 Release in 2010: 32.63 ton/capita",
+        title: "Qatar",
+        color:"#1d588c"
+    },
+    '2000-co2': {
+        x: 616,
+        y: 180,
+        dy: 150,
+        dx: -100,
+        label: "Highest CO2 Release in 2000: 48.37 ton/capita",
+        title: "Qatar",
+        color:"#1d588c"
+    },
+    '1990-co2': {
+        x: 625,
+        y: 185,
+        dy: 150,
+        dx: -100,
+        label: "Highest CO2 Release in 1990: 30.2 ton/capita",
+        title: "United Arab Emirates",
+        color:"#1d588c"
+    }
+
+
+}
+
+function genAnnotation(year,scale){
+
+    // Annotations
+    var config_key = year + '-' + scale
+
+    var map_Annotations = [
+        {
+        note: {
+            label: map_anno_config[config_key]['label'],
+            title: map_anno_config[config_key]['title']
+        },
+        color: [map_anno_config[config_key]['color']],
+        x: map_anno_config[config_key]['x'],
+        y: map_anno_config[config_key]['y'],
+        dy: map_anno_config[config_key]['dy'],
+        dx: map_anno_config[config_key]['dx']
+        }
+    ]
+    console.log(map_Annotations)
+    
+    var makeAnnotations = d3.annotation().annotations(map_Annotations)
+
+    map_Annotations_svg.html('').call(makeAnnotations)
+}
+
+
 function yearSelect(year){
     if(yearIndex[year]){
         var offset = scaleConfig[chosenScale][3]
@@ -226,6 +338,8 @@ function yearSelect(year){
         .attr("fill", d => {
             return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear] + offset])
         })
+
+        genAnnotation(chosenYear,chosenScale)
     } 
     
 }
@@ -301,9 +415,13 @@ function scaleSelect(scale){
 
 
         chosenScale=scale;
+
+        genAnnotation(chosenYear,chosenScale)
     }
 
 }
+
+
 
 
 const sb_width = 1000
