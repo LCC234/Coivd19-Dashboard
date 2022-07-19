@@ -396,7 +396,7 @@ function stackedBar(country){
                         .range([0,sb_width])
                         .padding([0.2]);
                 
-                sb_xAxis_svg.call(d3.axisBottom(xAxisBand).tickSizeOuter(0));
+                sb_xAxis_svg.call(d3.axisBottom(xAxisBand).tickSizeOuter(0).tickValues(xAxisBand.domain().filter(function(d,i){ return !(i%2)})));
     
                 yAxisBand = d3.scaleLinear()
                             .domain([0,(maxYDomain)])
