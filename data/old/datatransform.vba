@@ -66,3 +66,47 @@ With ThisWorkbook.Sheets(2)
 End With
 
 End Sub
+
+Sub worldGen()
+
+    Dim loopCount, lastRow, newRow, total, colCurr As Integer
+    Dim yearCurr, filterRange As String
+    
+    filterRange = "$A$1:$K$3967"
+    
+    With ThisWorkbook.Sheets(1)
+        
+        lastRow = .Cells(1, 1).End(xlDown).Row
+        newRow = lastRow + 1
+        
+        For loopCount = 1 To 42
+            
+            yearCurr = ThisWorkbook.Sheets(2).Cells(loopCount, 1).Value
+            
+            .Range(filterRange).AutoFilter _
+                Field:=4, _
+                Criteria1:=yearCurr
+            
+            total = Application.WorksheetFunction.Subtotal(109, Range(Cells(2, 11), Cells(lastRow, 11)))
+            
+            If total > 0 Then
+                
+                .Cells(newRow, 1).Value = "World"
+                .Cells(newRow, 2).Value = "WORLD"
+                .Cells(newRow, 3).Value = "WLD"
+                .Cells(newRow, 4).Value = yearCurr
+                
+                For colCurr = 5 To 11
+                    .Cells(newRow, colCurr).Value = Application.WorksheetFunction.Subtotal(109, Range(Cells(2, colCurr), Cells(lastRow, colCurr)))
+                Next colCurr
+                
+                newRow = newRow + 1
+            End If
+            
+            .ShowAllData
+            
+        Next loopCount
+    
+    End With
+
+End Sub

@@ -77,8 +77,8 @@ var minDomain_co = 0;
 var maxDomain_co = 49;
 
 var scaleConfig = {
-    'temp': [redRange,minDomain_temp,maxDomain_temp,0,'Global Warming Distribution', 'Surface Temperature Rise', 'Temperature (&#8451;)'],
-    'co2':[blueRange,minDomain_co,maxDomain_co,1, 'Global CO<sub>2</sub> Distribution', 'CO<sub>2</sub> Emissions', 'CO<sub>2</sub> Emissions (Metric Ton/Capita)']
+    'temp': [redRange,minDomain_temp,maxDomain_temp,0,'Global Warming Distribution', 'Surface Temperature Rise', 'Temperature (&#8451;)',false],
+    'co2':[blueRange,minDomain_co,maxDomain_co,1, 'Global CO<sub>2</sub> Distribution', 'CO<sub>2</sub> Emissions', 'CO<sub>2</sub> Emissions (Metric Ton/Capita)',true]
 }
 
 
@@ -263,7 +263,10 @@ function scaleSelect(scale){
         legendAxis_g.call(legendAxis)
             .select('path').attr('stroke', 'none');
 
-        map_g.selectAll('path').attr("fill", d => {
+        map_g.selectAll('path')
+            .transition()
+            .duration(200)
+            .attr("fill", d => {
             return colorScale(dataset[d.properties.iso_a3][yearIndex[chosenYear] + offset])
         })
 
@@ -293,6 +296,10 @@ function scaleSelect(scale){
         
         d3.select('#map-label-text').html(des)
 
+        d3.select('#map-label-text-mini')
+            .classed('displaynone',scaleConfig[scale][7])
+
+
         chosenScale=scale;
     }
 
@@ -303,7 +310,7 @@ const sb_width = 1000
 const sb_height = 400
 var sb_svg = d3.select('#stackedbar-svg')
                     .append('g')
-                    .attr("transform", "translate(" + margin + "," + margin+ ")");;
+                    .attr("transform", "translate(" + margin + "," + margin+ ")");
 var sb_xAxis_svg = sb_svg.append("g")
             .attr("transform", "translate(0,"+(sb_height+150) +")")
 var sb_yAxis_svg = sb_svg.append("g")
@@ -363,7 +370,6 @@ var genStackedBar =
 function stackedBar(country){
     return new Promise(function(resolve, reject)
     {
-        console.log('genStackedBar called')
         if (dataset[country]) {
             
             d3.select('#svg-container-stacked').classed('displaynone', false)

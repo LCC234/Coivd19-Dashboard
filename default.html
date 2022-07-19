@@ -11,13 +11,24 @@
 </head>
 
 <body>
-	<div id="intro-container" class="intro-container">
+	<div id="intro-container" class="intro-container displaynone">
 		<h1 id="intro-title"  class="intro-title">The Climate Change Crisis</h1>
 		<p id="intro-des" class="intro-des">Climate Change has been believed by experts (2022) to be highly attributed by 
 			the release of <b>Greenhouse Gases (CO<sub>2</sub>)</b>, <br>causing <b>global warming</b> and increased 
 			frequencies of <b>natural disasters (droughts, storms, etc)</b> </p>
-		<p id="intro-ref" class="intro-ref">
-			<u>References:</u><br>
+      <div id="line-tooltip" class="chart-tooltip">
+      </div>
+      <div id="svg-container-line" class="svg-container intro-container-svg-line">
+        <svg id="intro-line-svg" class="intro-svg svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 700" transform="translate(0,0)" ></svg>
+
+      </div>
+      <div id="svg-container-sb" class="svg-container intro-container-svg-sb">
+        <svg id="intro-sb-svg" class="intro-sb-svg svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1800 700" transform="translate(0,0)" ></svg>
+
+      </div>
+    
+    <p id="intro-ref" class="intro-ref">
+			<u>Reference:</u><br>
 			World Meteorological Organization. (2022). <i>Climate Change, Disasters and Their Mitigation</i><br>
 			Retrieved from <u>https://www.un.org/en/un-chronicle/climate-change-disasters-and-their-mitigation</u>
 		</p>
@@ -41,13 +52,14 @@
 		<div id="map-label" class="chart-label">
 			<p id="map-label-title" class="chart-label-title"><b>2019</b></p>
 			<p id="map-label-text" class="chart-label-text">Global Warming Distribution</p>
-
+      <p id="map-label-text-mini" class="chart-label-text-mini">*Based on referenced temperatures between 1951 and 1980</p>
 		</div>
 
     <div id="maphelp-label" class="chart-label">
 			<p id="maphelp-label-text" class="chart-label-text"><b>Hover Over</b> or <b>Click</b> on the countries<br>for more drilldowns :)</p>
-
+      
 		</div>
+  
 
 	</div>
 
@@ -80,7 +92,7 @@
   <p id="drill-down-title" class="drill-down-title">Lets drill down further...</p>
   <p id="drill-down-text" class="drill-down-text">Click on the countries for deeper dives :)</p>
 
-	<div id="stackedbar-tooltip" class="stackedbar-tooltip">
+	<div id="stackedbar-tooltip" class="chart-tooltip">
 	</div>
 	<div id="svg-container-stacked" class="svg-container-stacked displaynone">
 		<svg id="stackedbar-svg" class="svg-content" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 700" transform="translate(0,0)"></svg>
@@ -98,7 +110,7 @@
       <p>2022 July, Illustrated by<br><b>Chun Chie, Lee</b></p>
     </span>
     <span class="footer-ref">
-      <p>CS 416: Data Visualization, Narrative Visualization Project<br><u>Data References:</u><br>International Monetary Fund (IMF) Climate Change Data</p>
+      <p>CS 416: Data Visualization, Narrative Visualization Project<br><u>Data References:</u><br>International Monetary Fund (IMF) Climate Change Data<br>https://climatedata.imf.org/pages/climatechange-data</p>
     </span>
     
   </div>
